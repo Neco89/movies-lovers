@@ -1,5 +1,19 @@
+<h1>WELCOME TO MY WEBSITE</h1>
+
+<h2>WE HAVE MANY MOVIE LISTS HERE, LOOK</h2>
+
 <ul>
   <% @lists.each do |list| %>
     <li><%= list.name %></li>
+    <%= list.genre %>
   <% end %>
 </ul>
+
+<h2>BUT HOW ABOUT YOU CREATE YOUR OWN MOVIE LIST?</h2>
+
+<%= link_to "New list",
+  new_list_path(@list) %>
+
+<h3>Go to the dashboard</h3>
+  <%= link_to "Dashboard",
+  dashboard_path(@pages) %>

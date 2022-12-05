@@ -1,0 +1,8 @@
+<h1>DASHBOARD</h1>
+
+<ul>
+  <% @user.lists.each do |list| %>
+    <li><%= list.name %></li>
+    <%= list.genre %>
+  <% end %>
+</ul>
