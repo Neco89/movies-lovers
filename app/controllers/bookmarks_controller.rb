@@ -1,25 +1,25 @@
 class BookmarksController < ApplicationController
 
+  def new
+    @bookmark = Bookmark.new
+    @list = List.find(params[:list_id])
+  end
 
   def create
-    @bookmark = Bookmark.new(bookmarks_params)
-    @bookmark.list.user = current_user
+    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark.list = List.find(params[:list_id])
     @bookmark.save
     redirect_to dashboard_path(@pages)
   end
 
-  def new
-    @bookmark = Bookmark.new
-  end
-
   def destroy
     @bookmark.destroy
+    redirect_to list_path(@bookmark.list), status: :see_other
   end
 
-private
+  private
 
-  def bookmarks_params
-    params.require(:bookmark).permit(:comment)
+  def bookmark_params
+    params.require(:bookmark).permit(:movie_id, :comment)
   end
-
 end
