@@ -1,8 +1,31 @@
 <h1>DASHBOARD</h1>
-
-<ul>
-  <% @user.lists.each do |list| %>
-    <li><%= list.name %></li>
-    <%= list.genre %>
-  <% end %>
+<h1> This is my Dashboard</h1>
+<ul id="lists">
+<% @user.lists.each do |list| %>
+  <li>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= list.id%>">
+  <%= list.name %> <%= list.genre %>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-<%= list.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> <%= list.name %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Please edit or delete your list
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <%= link_to "Add movie", new_list_bookmark_path(list)%> </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <%= link_to "Edit", edit_list_path(list)%> </button>
+        <button type="button" class="btn btn-primary"> <%= link_to "Delete", list_path(list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></button>
+      </div>
+    </div>
+  </div>
+</div>
+  </li>
+<% end %>
 </ul>
